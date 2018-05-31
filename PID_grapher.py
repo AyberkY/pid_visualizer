@@ -1,9 +1,20 @@
+"""
+This is a part of my high school senior math project. This code is meant to connect to a balancing robot I built
+through a hc-06 arduino bluetooth module, and visualize the robot's PID controller's P, I, and D term outputs.
+However, the code only receives the robot's current angle, and integrates and differentiates it to display the 
+I and D terms respectively, rather than actually sending the I and D term outputs through bluetooth.
+
+Very clunky at the moment (low fps) because the matplotlib.animate() function deletes everything on the graph and re-plots from scratch.
+
+author: Ayberk Yaraneri
+"""
+
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import time
 import serial
 
-ser = serial.Serial('COM7', 9600, timeout = 1)
+ser = serial.Serial('COM7', 9600, timeout = 1)		#Change comport accordingly to wherever the bluetooth module connected.
 
 fig = plt.figure(figsize = (16, 6))
 ax1 = fig.add_subplot(311)
@@ -57,9 +68,8 @@ def animate(i):
 calibrated = False
 
 while not calibrated:
-	if ser.readline() == '1':
+	if ser.readline() == '1':		#The robot sends a '1' over bluetooth once it's done calibrating its gyro.
 		calibrated = True
 
 ani = animation.FuncAnimation(fig, animate, interval = 20)
 plt.show()
-
