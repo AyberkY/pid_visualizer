@@ -1,5 +1,14 @@
-from pynput
-import keyboard
+"""
+Simple program that listents to the keyboard and sends the corresponding commands to the robot so
+I can drive it around.
+
+Does not work at the same time with the PID_grapher program. This for messing around only.
+Could be integrated to work together pretty easily though.
+
+author: Ayberk Yaraneri
+"""
+
+from pynput import keyboard
 import serial
 
 ardu = serial.Serial('com5', 9600, timeout = 1)
@@ -29,6 +38,3 @@ def on_release(key):
 
 with keyboard.Listener(on_press = on_press, on_release = on_release) as listener:
 	listener.join()
-
-
-  
