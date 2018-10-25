@@ -7,4 +7,3 @@ I and D terms respectively, rather than actually sending the I and D term output
 
 Very clunky at the moment (low fps) because the matplotlib.animate() function deletes everything on the graph and re-plots from scratch.
 
-author: Ayberk Yaraneri
